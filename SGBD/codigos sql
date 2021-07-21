@@ -1,0 +1,255 @@
+use cadastro;
+show create table NOME; (mostra os comandos usados para criar a tabela)
+ou create database;
+create table pessoas(
+id int not null auto_increment,
+nome varchar(30) not null,
+nascimento date,
+sexo enum('M','F'),
+peso decimal(5,2),
+altura decimal(3,2),
+nacionalidade varchar(20) default 'Brasil' ,
+primary key(id)
+) default charset utf8;
+----------------------------
+insert into pessoas
+(nome, nascimento, sexo, peso, altura, nacionalidade)
+values
+('Godofredo', '1984-02-03', 'M', '78.5', '1.83', 'Brasil');
+
+select * from pessoas
+
+insert into pessoas values
+
+#caso não precisar alterar a ordem dos campos, pode-se colocar sem o indicador do campo
+
+(default, 'Ligia', '1980-08-25', 'F', '60.5', '1.72', default);
+
+--------------------
+alter table pessoas 				#altera tabela
+	add column profissao varchar(10);   #adiciona coluna
+	drop column profissao 				#remove coluna selecionada
+	add column profissao varchar(10) after nome;  #after é 'depois de'
+	add codigo in first                 # first primeiro na lista de columns
+	modify 								# consegue redefinir todas as constrants e tipos primitivos
+	change column profissao prof varchar(20); #modifica os nomes das column precisa colocar o nome antigo e o novo;
+	rename to 							#modifica o nome da tabela toda
+	add primary key (idcurso);			#adciona chave primaria a um campo
+--------------------
+drop table if exists 					#exclui tabela
+
+-----------------------
+create table if not exists cursos (		# if not exist só adiciona se não existir
+carga int unsigned,						# unsigned, número sem sinal
+totalaulas int unsigned
+
+----------------------------
+manipulacao de registro (linhas ou tuplas)
+update nome da tabela
+set(oque vai ser mudado) nome da coluna = 'novo nome'
+where(pra quem vai ser aplicado) 'chave primaria ou outro campo' = 'uma condição'
+limit 1; (limite de linhas que serão afetadas)
+
+delete from cursos (deleta uma linha especifica)
+where idcursos = '8';
+
+truncate table (deleta todos os registros de uma tabela)
+
+---------------------------------
+exportar base de dados :
+server > data export > seleciona o schema > dump (escolher o tipo)
+> self contained file (da pra configurar outros tipos ) > include create schema
+import
+opcao import escolher arquivo e opcao abrir 
+---------------
+mysqlserver connecta
+\sql
+mysqlsh \c
+root@127.0.0.1:3306
+
+sudo systemctl start  (ou stop) mariadb
+sudo /opt/lampp/lampp start (ou stop)
+-----------------------------------------
+					aprendendo o select
+
+select * from cursos // o asterisco significa todas as colunas
+order by XXXX DESC; //desc é o parametro que inverte a ordem da lista
+					//por padrão é ascendente ou usar parametro asc;
+
+
+SELECT - ( pode-se usar as colunas especificas como filtro no lugar do asterisco) from cursos
+
+WHERE
+a cláusula WHERE permite a filtragem das tuplas(linhas)
+select * from cursos
+where ano = '2016'
+order by nome;
+
+select nome, descricao, ano from cursos
+where ano <= '2015'    // pode ser usado operadores relacionais
+order by ano, nome;
+
+select nome, ano from cursos
+where ano between 2014 and 2016
+order by ano desc, nome;
+where ano in (2014, 2016, 2018)
+
+Like
+where nome like 'P%'; // like or not like operador de semelhança//o % substitui nenhum(nada) ou vários caracteres;
+'p_p%  //o sublinhado obriga que tenha um caractere
+
+DISTINCT
+exibe a ocorrencia da coluna apenas uma vez
+select distinct nacionalidade from gafanhotos
+order by nacionalidade;
+
+Agregação
+Count
+select count(*) from cursos where carga > 40; //conta e soma a ocorrencia
+max
+select max(totaulas) from cursos where ano = '2016'; //mostra o valor maximo que ocorre naquela coluna
+min
+select nome,min(totaulas) from cursos where ano = '2016';   
+sum
+select sum(totaulas) from cursos where ano = '2016'; //soma a ocorrencia da query
+
+Agrupando Registros
+GROUP BY 
+select totaulas, count(*) from cursos
+group by totaulas
+order by totaulas;
+
+select carga, count(nome) from cursos 
+where totaulas= 30
+group by carga;
+
+having 				// funciona como o where porém para o count //  serve somente para a coluna que foi agrupada
+select ano, count(*) from cursos
+group by ano
+having count(ano) >= 5
+order by count(*)desc;
+
+juntando o select agrupamento etc
+select avg(carga) from cursos;
+
+select carga, count(*) from cursos
+where ano > 2015
+group by carga
+having carga > (select avg(carga) from cursos);
+
+select profissao, count(*)from gafanhotos
+group by profissao
+order by count(*)desc;
+
+---------------------------------------
+adicionando chave estrangeira 
+alter table gafanhotos 
+add cursopreferido int;
+
+alter table gafanhotos
+add foreign key (cursopreferido)
+references cursos(idcurso);
+
+describe gafanhotos;
+inserindo dados usado o update ou alterando diretamente na tabela usando o select *
+update gafanhoto set cursopreferido = '6'
+where id ='1'; 
+
+----------CODIGOS SQL CURSO HOW BOOTCAMP--------------------------
+-- CREATE TABLE BILLBOARD
+create table public."Billboard" (
+"date" date null,
+"rank" int4 null,
+song varchar(300) null,
+artist varchar(300) null,
+"last-week" int4 null,
+"peak-rank" int4 null,
+"weeks-on-board" int4 null 
+
+);
+
+select count(*) as quantidade
+from public."Billboard" 
+limit 100
+;
+
+SELECT t1."date"
+	,t1."rank"
+	,t1.song
+	,t1.artist
+	,t1."last-week"
+	,t1."peak-rank"
+	,t1."weeks-on-board"
+FROM "Billboard" AS t1 limit 100;-- tabela 01 
+
+SELECT t1.song
+	,t1.artist	
+FROM public."Billboard" AS t1
+where t1.artist = 'Chuck Berry'
+; 
+
+SELECT t1.song
+	,t1.artist
+	,count(*) AS qtd_musica
+FROM PUBLIC."Billboard" AS t1
+WHERE 
+-- t1.artist = 'Chuck Ber ry' or t1.artist = 'Dua Lipa'
+t1.artist in ('Chuck Berry', 'Dua Lipa')
+GROUP BY t1.artist
+	,t1.song
+ORDER BY qtd_musica DESC;
+
+--JEITO BAGUNÇADO DE FAZER O JOIN----------------------------------------
+
+SELECT DISTINCT t1.artist
+	,t2.qtd_artist
+	,t1.song
+	,t3.qtd_song
+FROM PUBLIC."Billboard" AS t1
+LEFT JOIN (
+	SELECT t1.artist
+		,count(*) AS qtd_artist
+	FROM PUBLIC."Billboard" AS t1
+	GROUP BY t1.artist
+	ORDER BY t1.artist
+	) AS t2 ON (t1.artist = t2.artist)
+LEFT JOIN (
+	SELECT t1.song
+		,count(*) AS qtd_song
+	FROM PUBLIC."Billboard" AS t1
+	GROUP BY t1.song
+	ORDER BY t1.song
+	) AS t3 ON (t1.song = t3.song)
+ORDER BY t1.artist
+	,t1.song;
+
+
+--BOA PRATICA PARA FAZER O JOIN --------------------------
+with cte_artist as (
+	SELECT t1.artist
+		,count(*) AS qtd_artist
+	FROM PUBLIC."Billboard" AS t1
+	GROUP BY t1.artist
+	ORDER BY t1.artist
+	)
+	,
+cte_song as (
+SELECT t1.song
+		,count(*) AS qtd_song
+	FROM PUBLIC."Billboard" AS t1
+	GROUP BY t1.song
+	ORDER BY t1.song
+	)
+SELECT DISTINCT t1.artist
+	,t2.qtd_artist
+	,t1.song
+	,t3.qtd_song
+FROM PUBLIC."Billboard" AS t1
+LEFT JOIN cte_artist AS t2 ON (t1.artist = t2.artist)
+LEFT JOIN cte_song AS t3 ON (t1.song = t3.song)
+ORDER BY t1.artist
+	,t1.song;
+
+
+------------------------------------------------------------
+

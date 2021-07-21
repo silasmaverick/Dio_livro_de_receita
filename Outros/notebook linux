@@ -1,0 +1,237 @@
+dual core 2gb ram 40gb hd
+
+-----------FUNDAMENTOS DE LINUX----------------
+Linus Torvalds - Unix 
+Linux é o kernel ou núcleo do sistema operacional intermedia a conversa entre hardware e o shell (comandos ou programas )
+
+é desenvolvido por diversas pessoas e empresas ao redor do mundo
+multitarefa/multiusuário
+distribuido por empresas ou pf "distro"
+ubuntu-debian-suse-fedora-redhat-kali
+-------------TERMINAL---------------
+uso para automacao de processos através dos comandos, facilita o trabalho no sistema para Profissionais da Área
+
+abrir o terminal Ctrl + alt + t
+o comando pwd dá o caminho ou local que estamos logados n terminal
+dir lista os diretorios
+ls listagem de arquivos e diretorios
+cd - mudar de diretorio (change director)
+cd / esse comando irá para o raiz (/)
+cd ~ voltar para o diretorio pessoal
+ls -l lista com detalhes
+man ls (manual do comando)
+history - lista de ultimos comandos
+!! o comando execulta o ultimo comando executado
+
+crtl c - cancela o comando
+ctrl z - pausa o comando
+ctrl d - logout
+ctrl w - apaga a ultima palavra
+ctrl u - apaga a linha
+ctrl r busca um comando recente
+exit - logout
+
+mv - mover ou renomear um diretorio ou arquivo
+(mv Teste Linux) mv Linux ~ ou /nome
+touch criar arquivos vazios 
+cp - copia nome /diretorio
+tab auto completa
+rmdir - remover diretorio
+
+----------COMANDOS PARA MANIPULACAO DE ARQUIVOS e textos e redirecionamento
+/ diretorio raiz
+/bin binarios principais dos usuarios (executavel)
+/boot/ arquivos do sistema de boot
+/dev/ arquivos de dispositivos
+/etc/ arquivos de configuracao do sistema
+/home/ diretorio dos usuarios comuns do sistema
+/lib/ bibliotecas essenciais do sistema e os modulos do kernel
+/media/ diretorio de montagem e dispositivos
+/mnt/ diretorio de montagem de dispositivos - mesmo que "media"
+/opt/instalacao de programas nao oficiais por conta do usuario
+/sbin/armazena arquivos executaveis que representam comandos administrativos (ex shutdown)
+/srv/ diretorio para dados de serviços fornecidos pelo sistema
+/tmp/ diretorio para arquivos temporários
+/usr/ segunda hierarquia do sistema onde ficam usuario comuns do sistema e programas
+/var/diretorio com arquivos variaveis gerado pelos programas do sistema ex logs impressora email cache
+/root/ diretorio do usuario root; o usuario root tem o total poder sobre o sistema
+/proc/diretorio virtual controlado pelo kernel/
+
+cat/proc/cpuinfo /meminfo pipe|more
+lspci visualizar todos os hardware conectados via pci
+
+lsusb - lista os dispositivos usb
+arch - mostra a arquitetura do kernel 
+uname - nome do kernel 
+uname - r nome
+free - lista a quantidade de memoria
+du -h ~ arquivos e diretorios e quanto cada um usa de hd
+cat /etc/passwd - todos os usuarios do sistema
+reboot - reinicia o sistema
+shutdown -h now - colocar a flag + o tempo --help for comand help
+lscpu - mostra todas informacoes sobre cpu
+lshw - lista de hardware
+lshw - short - caminho do hardware descricao
+echo determina uma saida no terminal
+>> salva a saida em um arquivo \n pula a linha
+
+
+-------LIDANDO COM ARQUIVOS TXT---------
+nano editor de texto ajuda nano
+ctrol \ localiza e substitue
+cat mostra o conteudo arquivo no terminal
+tac teste.txt inverte o cat
+head mostra as primeiras 10 linhas
+tail mostra as ultimas 10 linhas
+tail teste.txt > distros.txt 9redimensiona
+>> ele adiciona a saida a um arquivo ja existente
+cal calendario
+date mostra a data 
+| executa dois comandos juntos
+grep busca por algum texto dentro de determinado arquivo
+more - divide o resultado final de saida ao mostrar no terminal
+< direciona a entrada de um arquivo para a saida de um comando
+less - tbm faz a paginacao porem nao aparece o mais tem que apertar o enter pois aparece um ":"
+& execulta dois comandos um depois do outro
+&& execulta dois comandos sem pausa
+file qual o tipo do arquivo
+whatis - o que faz um determinado comando
+
+-------------Fundamentos redes Linux-----------------
+é conjunto de equipamentos interligados de maneira a trocarem informacoes e compartilharem recursos
+wide ou world area network - rede geograficamente distribuida
+redes man - metropolitan area network
+rede local = local area network - rede lan
+protocolo - é uma linguagem usada pelos dispositivos para que eles consigam se entender
+	ip - protocolo de internet - endereço ip: numeros que identificam o seu computador numa rede
+	icmp - tem por objetivo prover mensagens de controle na comunicacao entre nos
+	dns - domain name server - protocolo de aplicacao tem por funcao identificar endereços ip e manter uma tabela com endereços dos caminhs de algumas redes
+interface de rede - é um software ou hardware que faz a comunicacao em uma rede de computadores as interfaces de rede no linux estão localizada no /dev e a maioria é criada dinamicamente pelos softwares
+ex eth0 
+
+interface loopback é um tipo especial de interface que permite fazer conexoes com vc mesmo, com ela, voce pode testar vários programs de rede sem interferir em sua rede. o padrão. o endereço ip 127.0.0.1.
+
+ifconfig - informacoes gerais da rede endereços interfaces
+hostname - nome do computador na rede
+hostname -I - endereço IP em nossa rede
+who - como estamos logados na rede
+whoam - nome do usuario logado na rede
+ping - protocolo icmp, envia msg para determinado host
+ping --help
+ping
+dig - informacoes de dns 
+dig +short - exibe apenas o dns do site
+traceroute - traca a rota até determinado site exibe nós até o site.
+whois - tras ainda mais informacoes sobre determinado site
+finger - toda informacao do usuario que esta logado no host
+
+--------COMANDOS GERAIS------------------
+history -c - apaga o history
+alias - dá o apelido a determinado comando
+nl - conta o numero de linhas
+wc -l conta o numero de linhas inclusive as em branco
+wc -w nome.txt conta o numero de palavras
+wc -c tamanho do arquivo
+ls -a arquivos ocultos
+diff - gerar diferencas entre arquivos de texto
+sort -n - organiza a saida do arquivo em ordem numerica
+
+last reboot - todas as informacoes sobre reinicializacoes do sistema
+route -n tabela de roteamento ip do kernel
+
+time - mostra o tempo de um processo
+uptime - mostra informacoes de carregamento de sistema
+cowsay - vaca falando
+init 0 - desliga a maquina imediatamente
+telinit 0 - desliga a maquina imediatamente
+halt - pede uma autenticacao para desligar a maquina
+seq - imprime uma sequencia de numeros
+
+------------controle de usuario, grupo e permissoes
+add user nomedousuario - adiciona novo usuario
+sudo - elevar privílégio
+su nome do usuario - para trocar de usuario
+passwd nomedousuario - altera a senha
+lastlog- exibe informacoes de login de todos os usuarios do sistema
+last - exibe uma listagem de entrada e saida de usuarios no sistema 
+logname
+id - o usuario e o grupo que esse usuário pertence (usuario grupo com o mesmo usuario)
+cat/etc/passwd - exibe todos os usuarios
+userdel -r nomedousuario - deleta a pasta pessoal e o usuario
+
+grupos permitem organizar os usuários e definir as permissoes de acesso a arquivos e diretorios de forma mais fácil 
+cat /etc/group - visualiza todos os grupos
+groups - exibe todos os grupos de um usuario
+addgroup - ubuntu adiciona um grupo
+adduser usuario grupo - adiciona um usuario a um grupo
+gpasswd -a usuario grupo - adiciona um usuario a um grupo
+groupdel grupo - remove grupo
+
+-------Permissões--------------	
+permissoes servem para restringir acessos a arquivos e diretorios como leitura escrita e execucao onde
+flag r - read
+w -write - escrita
+x - execution - execucao
+
+ls -lh verifica as permissoes em um diretório
+d - diretorio -'-' arquivo em seguida as permissoes rwx (dono/grupo/outros)
+chmod - mascara octal 421 -é composta por numero sob abase 8 ou seja de 0 a 7
+oprimeiro digito representa o dono do ficheiro
+o segundo digito representa o grupo
+o terceiro digito representa os outros
+as permissoes sao especificadas para cada um
+chmod 100 nome do arquivo . para mais de uma permissao somar o numero correspondente
+
+-------COMPACTACAO ------------------------
+-compactadores sao programas que diminuem o tamanho de um arquivo ou diretório
+- as extensoes identificam o tipo de arquivo e programa necessário para manipular o mesmo. 
+ao descompactar a extensao é removida do arquivo
+gzip - compactador muito usado, possui excelente taxa de compactacao 
+gzip arquivo.txt - compacta
+gunzip arquivo.txt - descompacta
+gzip- 9 usa a compactacao maxima
+zip
+unzip
+bzip2
+bzip2 -d - descompactar
+rar a nomedoarquivo.rar arquivo - compactar
+rar x nomearquivo.rar - descompactar
+
+arquivadores - junta varios arquivos em um só, mas pode ser usado em conjunto com um compactador para armazenar arquivos compactados.
+tar - tar -cf nome.txt.tar nome.txt 
+tar.gz descompactar tar-xvf nome.txt.tar.gz
+
+-----PACOTES--------------------------------
+pacotes são programas colocados dentro de um arquivo identificados por sua extensão, e incluem arquivos necessários para a instalacao de programa extensao deb, rpm e outros
+sao sistemas que possuem resolucao automatica de instacao 
+sudo apt install pacote
+sudo apt upgrade pacote
+sudo apt remove pacote 
+atualizacao do sistema
+apt update && apt upgrade
+
+site de pacotes
+pkgs.org
+rpm.pbone.net
+sudo dpkg -i nome do arquivo instala pacote
+sudo dpkg -I nome do arquivo.deb
+sudo dpkg -r nomedopacote
+
+-----------------------FEDORA
+rpm -ivh pacote.rpm instala
+rpm -U pacote.rpm atualiza
+rpm -e pacote.rpm remove
+yum install pacote
+yum remove pacote
+
+
+
+
+
+
+
+
+
+
+
+

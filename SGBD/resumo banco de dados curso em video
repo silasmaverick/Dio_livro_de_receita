@@ -1,0 +1,142 @@
+*ATENÇÃO* após instalar o workbench baixar o gnome keyring instalar com o link
+https://wiki.archlinux.org/index.php/GNOME/Keyring
+banco de dados contém tabelas contem registros e registros são preenchidos por campos
+systemctl start mariadb
+
+DDL (data definition language)
+	create database
+	create table
+	alter table
+	drop table
+
+
+DML (data manipulation language)
+	insert into
+	delete
+	truncate
+	SELECT * alguns autores
+
+DQL (data query language) SELECT
+
+
+
+o ultimo campo não tem vírgula
+se estiver entre crases, permite que seja colocado acentos nas palavras de definição
+'''usa-se em textos longos'''
+
+tipos primitivos 
+numerico =>
+	inteiro (subdivide em itens com maior precisao) -
+		TinyInt, SmallInt, Int, MediumInt, BigInt
+ 	real
+ 		Decimal, Float, Double, Real 
+  	logico
+  		Bit, Boolean
+data/tempo
+	Date, DateTime, TimeStamp, Time, Year
+literal =>
+	caractere Char, VarChar
+	texto - TinyText, Text, MediumText, LongText
+	binario - TinyBlob, Blob, MediumBlob, LongBlob
+	colecao - Enum, set
+Especial - Geometry, Point, Polygon, MultiPolygon
+
+
+create database cria
+drop database apaga
+
+constraints ( regras) 
+default character set utf8
+collation default collate utf8_general_ci; utilizacao de caracteres latinos
+
+manipulacao de registro (linhas ou tuplas)
+
+exportar base de dados :
+o backup de um banco de dados se chama dump
+---------------------------------------
+
+result set é o resultado de uma query (consulta)
+
+wildcard % usado como coringa nas query
+
+<> é o sinal de diferença no sql
+
+-----------------------------------------
+entidade - container ou tabelas
+atributos - caracteristicas das tuplas
+relacionamento - qual a ligacao entre as entidades
+cardinalidade - qual a capacidade de ligacao no relacionamento das entidades
+muitos para muitos
+um pra um
+por padrão usando o conceito de ir pelo maior, colocar N
+um pra muitos
+
+chaves
+chave estrangeira, é uma chave primaria de um lugar que foi para outro lugar. No lugar de recebimento ela passa a ser chave estrangeira
+um pra um - entidade dominante sao representadas do lado esquerdo. Deve-se escolher uma entidade para ser a dominante. A seguir, transferir a chave primaria da outra entidade para a entidade domintante como chave estrangeira
+um pra muitos - pega a chave primaria do lado um e joga para a entidade do lado muitos como chave estrangeira
+muitos pra muitos - o relacionamento vira entidade tbm com sua propria chave privada. São criados minis relacionamentos e a cardinalidade fica proxima da "entidade relacionamento" recém criada. a cardinalidade para os novos minis relacionamento é sempre 1n ficando 1nn1. Após isso aplicar a regra do um para muitos.
+
+
+engine é uma máquina de criacao de tabelas: ex engine=innoDB
+
+4 regras transação acid
+atomicidade - ou toda a tarefa é feita ou nada é considerado
+consistencia - um bd se antes da trançacao estava ok, depois tbm deve estar ok. se nao reverte pro estado eanterior
+isolamento - os comandos não podem interferir em outros que estao sendo executados ao mesmo tempo
+durabilidade - uma transação deve durar o tempo necessário
+---------------------------------------------
+erro de integridade referencial
+ja existe a relacao entre entidades não é possivel deletar o registro em referencia.
+
+-------------------------------------------
+junções JOIN(inner join) //obrigatório usar o ON
+select nome, cursopreferido from gafanhotos;
+
+select nome, ano from cursos;
+
+select gafanhotos.nome,cursos.nome, cursos.ano
+from gafanhotos join cursos
+on cursos.idcurso = gafanhotos.cursopreferido;
+
+select g.nome,c.nome, c.ano
+from gafanhotos as g inner join cursos as c
+on c.idcurso = g.cursopreferido
+order by g.nome;
+
+-------------------------------------
+outer join //deve-se escolher a tabela preferencial para ser mostrada. A esquerda left join ou a direita right join
+select g.nome,c.nome, c.ano
+from gafanhotos as g left outer join cursos as c
+on c.idcurso = g.cursopreferido
+;
+
+select g.nome,c.nome, c.ano
+from gafanhotos as g right join cursos as c
+on c.idcurso = g.cursopreferido
+;
+--------------------------------------------
+
+muitos pra muitos 
+
+CREATE TABLE gafanhoto_assiste_curso( 
+	id int not null AUTO_INCREMENT,
+	data date,
+    idgafanhoto int,
+    idcurso int,
+    primary key(id),
+    foreign key(idgafanhoto) references gafanhotos(id),
+    foreign key (idcurso) references cursos(idcurso))
+    
+default charset = utf8;
+
+select g.nome, a.idgafanhoto, g.id, idcurso from gafanhotos as g
+join gafanhoto_assiste_curso as a
+on g.id = a.idgafanhoto;
+
+select g.nome, c.nome from gafanhotos as g
+join gafanhoto_assiste_curso as a
+on g.id = a.idgafanhoto
+join cursos as c
+on a.idcurso = c.idcurso
+order by g.nome;

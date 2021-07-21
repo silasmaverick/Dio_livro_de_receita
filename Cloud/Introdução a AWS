@@ -1,0 +1,221 @@
+Introdução a AWS
+
+
+pedro guth
+eliézio mesquita
+
+PROVA EM PORTUGUES em julho
+aws cloud pratitioner
+serviços globais e regionais
+ir nas cobranças billings para ver os recursos cobrados
+
+
+https://aws.amazon.com/pt/partners/
+https://youtu.be/hUFJBUBNzlQ
+https://youtu.be/yqFdqT6yUt4
+https://aws.amazon.com/pt/compliance/shared-responsibility-model/
+
+----------------------
+vantagens da cloud
+melhor gerenciamento dos recursos físicos/ sistema hibrido/serviços pré estruturados/paga-se pelo uso/democratização da infra(enterprises, startups, public sector)
+
+global infrastructure
+regiao(regions) - conjunto isolado de datacenters 
+AV (availability zones) zona de disponibilidade - os datas centers. Onde é provisionado o datacenter ou maquina virtual. Onde é provisionado a máquina ou serviço
+SP 3 AZS
+
+pontos de presença - points of presence
+locais para cachê cacheamento. Mini datacenter
+
+startup resources
+aws activate
+aws startup events
+aws lofts
+
+public sector entities
+government
+education
+nonprofits
+
+beneficios 
+agility
+elasticity
+cost savings
+rapid deployment
+
+alta disponibilidade é colocar em varios locais para a aplicacao nunca parar
+
+AWS SERVICE DOMAINS
+	compute (serviços de computacao)
+	Provisionar servidores sobre demanda
+		Amazon Elastic Compute Cloud (amazon EC2) instancias mesmo que máquina
+			escolhe a máquina o S.o etc..
+			modelos de contratação:
+			- reserved instance: um ou três anos e paga menos por hora
+			- On-demand instances: alugar pelo tempo que precisar 
+			- spot instances: instancias leiloes de maquinas que nunca acabam e perde a máquina se alguem pagar mais. Ideal para aplicacoes leves e processamento rapido 
+		
+		Amazon EC2 Auto Scaling: diciona ou remove ec2 instances de acordo com o uso automaticamente minimo, ideal e máximo 
+
+		Elastic load Balancing
+		Balanceador de carga e Requisições, gerenciamento de redimensionamento para quantidade de máquinas 
+		application load balancers - para requisicoes de http e https da camada 7 distribuindo entre máquinas virtuais. 
+		network load balancers rede camada 4
+
+		Amazon Elastic Container Service (ECS)
+		gerenciador de conteiners (orquestrador de conteiners)
+
+		AWS Lambda - Computacao sem servidor da aws: paga apenas para os milissegundos que a máquina processar o código. Usa-se máquina disponível em algum lugar upload code, acionador, processamento, pay only for the computer time you use. Serviço servless
+		aplicativo onde todo o back-end do processamento é em lambda
+		1000 lambdas gratuitos - granulalidade por milisegundo - calculator.aws
+
+
+	storage (AWS Storage Service)
+		Amazon S3 (simple storage service)
+		você pode guardar qualquer tipo de dados na internet. Arquivos estáticos. Durabilidade chance de se perder um dado (3azs)
+		99. 11 noves de durabilidade
+			- classes de armazenamento(camadas) $ camada fria, preços mais baixos de acordo com a demanda do cliente, 
+			- IA infrequented access
+			- buckets ( diretórios do s3 - virginia)
+			- make public
+			- gb/sec a cobrança
+
+		EBS - colocar hd e ssd dentro das máquinas virtuais. SSD e HD velocidade pré definida vai ficar em uma unica maquina
+		
+		EFS - Amazon Elastic File System: várias máquinas podem enchergar o mesmo disco. Capacidade elástica
+
+
+	database
+	Amazon RDS - fully managed(a AWS gerencia a maior parte) um pouquinho mais caro porém mais estável. 
+		É um serviço que dá um banco para o gerente. Banco relacional. Amazon Aurora, oracle, postgres, mariaDB, MySQL, etc...
+
+	Amazon Dynamo DB - banco noSQL
+	Internet das coisas (IoT - Internet of things), gaming, mobile backends, serviço serveless. 
+
+	AWS DMS - Database Migration Service
+	migrate databases to aws rapido e seguro
+	gratuito
+
+networking
+	Amazon Virtual Private Cloud (VPC) - rede local na nuvem aws, sempre que criar uma conta ja vem pelo menos uma vpc
+	- wizard de vpc. Já dá pré modelos de vpc considerando sub-redes
+
+	Amazon Route53 (DNS) -translate domain names to numeric IP address
+	faz roteamento entre máquinas globais
+
+	AWS Direct Connect - serviço de link dedicado (constratação de uma estrutura física datacenter homologado)
+
+	AWS CloudFront - CDN conjunto de datacenter pra chegar de um ponto A ao ponto B com cacheamento. static asset caching, video streaming, software distribution, 
+
+COMO ACESSAR O AWS service
+
+ - console.aws 
+ - AWS Cli - linha de comando uso de scripts direto de um terminar mexer na aws
+ - AWS Manage Service - SDKs tools para usar direto no código
+
+ outros serviços - analitcs BI (quicksight), mobile, media services, aplication integration, etc.. 180 serviços publico 
+
+
+----------Segurança e Compliance-------------
+visibilidade - 
+auditavel - 
+controle - 
+agilidade - 
+
+diagrama CIA 
+Confidentiality - s3, data base, permissions, 
+(disponibilidade)Availability - aws av zones, backups, networks
+Integrality - dados seguros, criptografado, 
+
+Shared responsibility model
+custumer 
+	- data - plataforma, patch de segurança, gerenciar firewall, criptrografia dos dados
+aws - compute, storage, database, network, regions,  
+security of the cloud (aws)
+security in the cloud (costumer)
+
+em serviços gerenciaveis a responsabilidade da aws aumenta. 
+IAaS, PAaS, SaAS
+
+Identidade e gerenciamento de acesso
+	amazon cognito
+	aws directory service
+	**Importante*** aws identity and acess management (iam)
+	aws secrets manager
+	aws single sing-on (sso) um unico login consegue fazer diversos logins em varios serviços
+
+Ferramentas de detective (deteccao)
+	aws security hub
+	amazon guardduty
+	amazon inspector
+	amazon macie com machine learning ele olha pra todos os seus serviços da aws
+
+infrastruture protection
+	aws shield - evita cair o serviço por excesso de acessos
+	aws web waf - firewall
+	aws firewall manager
+data protection
+	kms - para dados parados public key + private key 
+	aws cloudhsm 
+	aws certificate manager
+
+
+COMPLIANCE
+	AWS Artifact - atende a ISOs e outras certificações mundiais. É uma regra com todas as regras de compliance que a aws aceita. 
+
+
+	IAM - controlar acesso as resoluções AWS e serviços
+	criar um usuario. Todos os usuarios não tem permissoes por padrão
+		grupos - tipos de permissoes
+			policies - colocar e tirar as politicas nas permissoes
+		MFA - autenticacao de multi fatores
+		hardware e virtual devices
+ 	AWS Artifact - servicos de complience
+	AWS CloudTrail - AWS cloudTrail registro de uso de api (garçon pega a requisicao pega a comida e devolve)
+
+
+---------Management and Governance--------
+ENABLE
+	- Habilitar, criar ambientes, improve architecture, criar politicas
+	AWS organization ( conta mae e contas filhas, pagamento de um fatura só para todas as contas) 
+	AWS Control Tower - Automatização de criacao de contas com serviços já pré provisionados
+
+PROVISION - 
+	AWS CLOUDFormation
+	Scripty Criar com um código. JSON ou yml.
+	Criacao de recurso automaticos com script
+	AWS Marketplace - máquinas virtuais já com licenças (várias empresas embutidas)
+
+OPERATE - 
+	monitorar, auditar, analisar
+	Monitorar - CloudWatch - monitoramento da aplicação 
+	AWS Simple Notification Service (sns)
+	AWS Trusted Advisor checks (cost, perfomace, security, faul tolerance, service limits)
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
