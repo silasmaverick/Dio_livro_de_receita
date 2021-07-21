@@ -1,0 +1,216 @@
+Conheças as principais ferramentas da AWS para os processos de ingestão (Kinesis e Snowball), transformação/preparação (MapReduce e Glue) e armazenamento/análise de dados (Redshift).
+
+
+papel do engenheiro de dados
+O aumento da quantidade de dados disponíveis e a demanda por dc para analisá-los fez com que a profissão de engenheiro de dados se tornasse essencial para as organizações
+- possui habilidades ao desenvolvimento e arquitetura de software, além de sólidos conhecimento em banco de dados, devops e infraestrutura de TI.
+"engenheiro de dados é um tipo especializado de engenheiro de software que possibilita outros a responderem questoes sobre grandes datasets com restricoes específicas de latência e tempo" natha marz
+skills:
+	- mysql, linux, sqlserver,bussines intelligence, bg python, database data warehousing, hadoop.
+responsabilidades: Garantir que os dados estejam disponíveis para a análise de forma segura
+
+analise(jobs((batch), realtime(streaming))
+transformacao: ETL, pipelines
+
+armazenamento: banco de dados e repositório de arquivos
+
+disponibilidade: APIS, Arquivos, Bancos de dados
+
+-------BUSINESS INTELIGENCE--------
+BI - Processo de transformar dados em informações e informações em conhecimento - Gartner
+Propósito - Converter o volume de dados em informações relevantes para o negócio, por meio de relatórios analíticos (informações que já ocorrência)
+dados > informacao>conhecimento> decisao Modelo Volume Valor
+
+Aplicações:query report,mneração de dados,bugget & forecast
+kpi,dashboards de gestão
+
+ferramentas de bi: microstrategy, gds, looker, powerbi, tableau, qlikview
+
+--------------------------------------
+Data warehouse(DW)
+antes do dw - dificuldade em gerar informacoes a partir dos dados
+definicao:
+	é uma arquitetura de armazenamento projetada para conter dados extraídos de sistemas de transações, armazenamentos de dados operacionais e fontes externas.
+
+OlTP /VS/ OLAP
+online transactional processing - sistema transacional
+online analytical processing - modelagem de dados.
+
+foco operações do dia dia/ suporte a decisão
+origem transações em tempo real / base de dados de sistema transacionais
+perfomance - milissegundos/minutos horas
+volatilidade - atualizações curtas e rápidas iniciadas pelo usuário/geralmente grande devido à agregação de grande conjuntos de dados
+design - normalizado/desnormalizado
+
+Modelo Relacional /vs/ Dimensional
+entidades tem uma relacao de modo que a informacao não seja duplicada /Dimensões vs fatos 
+
+Arquitetura Básica de um DW
+data sources(fontes)> warehouse modelado < usuarios
+
+operational system flat files>metadata>summarydata, raw data< analitics<reporting,mining
+
+arquitetura - stagin area
+camada a mais antes do warehouse
+
+arquitetura - data marts
+adiciona uma nova camada chamada data marts, GERALMENTE modelados por assuntos específicos 
+
+-----------------------------------
+movimentação dos dados
+Ferramentas de ETL é um processo automatizado que coleta dados brutos, 
+extrai as informações necessárias para 
+análise, transforma em um formato que atende às necessidades de negócios e 
+carrega em um data warehouse ou n destinos
+
+ETL no DW:
+A cada movimentação o etl é presente.
+
+ETL - Tipo de movimentação:
+cargas completas- truncate & load (apaga todos os dados e carrega novamente)
+cargas incrementais - data /ID (diferenca entre uma carga e a última)
+Frequencia (diária, semanal, mensal)
+
+pode melhorar significativamente a qualidade dos dados
+	- qualidade e padronização/validação dos dados
+	- metadados(descrevem os atributos dos dados, dão significado aos dados)
+
+ETL - desafios:
+escalabilidade -A escabilidade é um dos recursos mais importantes em uma ferramenta ETL moderna
+Acurácia - garantir que os dados que vc transforma sejam precisos e completos
+manusear fontes de dados diversas 0  lidar com diversos tipos de fonte de dados. 
+
+Considerações finais.
+DW é fundamental para um sistema de apoio à decisão
+acesso simplificado a dados histórico
+facilidade em consulta de informações
+avalie as origens e tipos de dados
+planeje a malha de etls
+atencao a modelagem dos dados(dimensional)
+producao de relatórios
+
+Data Marts (DM)
+-é um subconjunto de um data warehouse
+-Orientado para uma linha de negócios específica
+- contem repositórios de dados resumidos
+- por exemplo, o dm do departamento de vendas
+- inmon /vs/ kimball
+	top-down design / bottom-up desing data warehouse star schema
+
+qual utilizar? 
+em empresas já consolidadas topdown
+em empresas iniciantes bottomup 
+
+ ------------------------
+ ecossistema hadoop
+
+ amazon S3 - Simple storage service
+ data lakes, sites, aplicativos, etc escalavel
+amazon rds - gerenciamento completo do banco de dados relacional
+OLTP - paga por hora - postgres
+
+redshift
+OLAP - Online Analitical Processing
+clusters - data warehouse. otimizado para analitcs  escalável para selects
+
+redshift spectrum *
+
+dynamoDB noSQL - 10 trilhoes solicitacoes por dia . Banco Serveless
+voltado para perfomace
+
+EC2 - processamento amazon elastic 
+compute cloud (ec2) - serviço de servidores virtuais, facilita a computacao em nuvem na escala da web
+
+ecs - elastic container service
+rodar imagem docker
+eks - elastic kubernetes
+ecs firegate
+
+free tear aws
+
+amazon database migration services
+serviço de migracao de um banco de dados para outro ex. postgres para redshift
+
+aws lambda
+aula propria, 
+
+aemp mapduce
+
+amazon emr ou 
+databricks ?
+
+aws glue jobs - ETL bigdata spark
+
+data stream kinesis 
+
+athena. Serviço de consultas interativas que facilita a análise de dados no amazon s3 usando sql padrao. 
+
+amazon cloudformation - cópia do terraform infraestrutura como código
+
+prefect substitui o airflow?
+
+aws s3 cli - command line interface
+
+
+--------------------------------------------
+
+video 2 grego
+
+5 vs da Big DATA
+volume - valor - velocidade - variedade - veracidade 
+
+principais camadas de dados
+DATABASE - servico de armazenamento transacional ou não de dados como baixa latência ou nao
+
+ingestão de dados - serviços e ferramentas responsáveis por extrair informações de um ponto
+de origem de dados para um ponto de destino de dados, onde o dado será processado
+
+processamento de dados - serviços responsaveis por processar dados em alta escala e velocidade
+e disponibilizacao para áreas interessadas. 
+
+armazenamento de dados - serviços responsáveis por armazenar os dados de maneira que eles estejam disponiveis seguros e elasticos
+
+visualizacao de dados - camada de apresentacao de dados onde será possivel expor os dados visualmente para que sejam feitas análises e tomadas de decisão 
+
+modelagem de dados - camada e exploração e análise de dados onde ocorrerá o estudo científico para a geracao de modelos baseados em inteligência artificial 
+
+democracia de dados - camadas responsáveis pela disponibilizacao segura das informa~çao e dados
+
+data e ia landscape 2020 - foto
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

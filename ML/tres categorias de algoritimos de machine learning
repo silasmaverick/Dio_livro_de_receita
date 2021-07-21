@@ -1,0 +1,68 @@
+machine Learning webnar
+
+Features and weights 
+
+f(x)= a0x0 + a1x1+ ...+ anxn
+
+x = feature (variavel independente= data point = dado enviado naquele momento 
+weight: qual o peso dessa variavel na equação. Pode olhar o passado do cliente para definir um valor matemático
+
+75% a 90% é um valor aceitável de precisão em boas empresas
+
+tres categorias de algoritimos de machine learning
+categoria supervisionada: identificando padrões que ja foram definidos: ex: foi idenfificado por um humano que a foto foi definida como um veículo
+É importante fornecer o maior numero de dados para que o modelo possa ter grande acuracia
+problemas (supervisionado)
+binario: sim ou não, fraude ou não
+multiclasse : se é suporte, retorno, conta (conjunto de classes que vao representar o problema)
+regressão: um valor matematico baseado na história do dado. (ex: qual sera que é um valor de um produto para que eu posso aumentar o faturamento) - pode tbm utilizar dados de outras empresas
+
+
+dados não supervisionados
+ clustered data: dados seguimentados: qual idade compra mais tal produto
+ *algoritimo para identificar falha em uma câmera de segurança 
+ (expert de domínio: quem conhece o assunto)
+ forma gráfica para mostrar o segmento e padrão de funcionamento 
+
+
+reinforcement learning; tentativa e erro: quem diz se acerta ou erra é o ambiente. 
+aws deepracer recompensa por acertar e punicao maior por errar
+
+deeplearning aprendizagem profunda
+artificial intelligence > machine learning> deep Learning
+deep learning aprende com ele mesmo
+classificação de imagem
+
+the machine learning pipeline; conjunto de passos que deve-se seguir para atingir um objetivo
+
+definicao do problema> verificar se o problema é ML?> data collection e integracao, processamento e visualizacao> modelo training and tuning ( feature engineear( retreinamento do modelo ))
+esta bom para o negocio? poe o modelo de producao
+
+the amazon call center problem
+cliente liga pra amazon>departamento errado>tier0 não techinico suficiente>agente correto
+
+problema, como posso encaminhar o cliente para o atendente correto
+é um problema de ml
+
+coleta e integração (steps e pre processamento)
+historia das chamadas, agentes x y ), começar a ver as variaveis independentes)
+
+pré processa e visualizar as informações:
+skill dos agente, limpeza dos dados, análise das informações, estatistica e porcentagem. Visualização de dados usando dados
+
+feature engineering
+verificar se as informações são relevantes ex(data, o que comprou, dias desde a ultima compra). geralmente faz depois do modelo treinado 
+
+treinar o modelo. Model training and tuning
+80% dados para treinamento: aquele que vai oferecer ao modelo para que possa usar na equaçao matematica
+
+validation set 10% vai melhorando com o tempo
+test set 10% dados para teste (dados que o modelo nunca viu)
+
+avaliacao o modelo. model evaluation: o modelo atende? Quantas vezes o cliente foi roteado na primeira tentativa. 
+
+se atendeu, model deployment. 
+
+next steps; aprender mais. 
+
+
