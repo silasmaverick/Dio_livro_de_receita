@@ -1,0 +1,137 @@
+gui(grafic user interface) x cli (comand line interface) 
+comandos básicos     linux (bash)            x  windows (shell) 
+	mudar de pastas - cd / cd..(retornar)    x  cd / cd..(retornar)
+ 	listar as pastas - ls                    x  dir
+	criar pastas - mkdir                     x  mkdir        
+	limpar - clear (ctrl+l)                  x    cls 
+	auto completar (tab)
+	criar arquivos echo hello> hello.txt
+   	deletar arquivos   rm -rf(remove for)   x  del                    
+	deletar diretorios                      x rmdir workspace /S /Q
+os comandos possuem flags, que são variantes que formatam o comando 
+
+instalando o git
+integração com o windows explorer ativado git bash here git gui here
+unix style
+
+linux site comando ,git --version
+
+apple homebrew 
+
+
+----COMO O GIT FUNCIONA POR DEBAIXO DOS PANOS------------------------
+sha1 -  significa secure has algorithm. saida algoritimo encriptacao 40 digitos e serve como identificação
+é uma forma curta de representar o arquivo. a cada modificação o código de 40 digitos muda (stdin)
+gitbash - identificar arquivos
+clicar com o botao direito option themes dracula
+penssl sha1 infogeral
+SHA1(infogeral)= dd122581c8cd44d0227f9c305581ffcb4b6f1b46
+
+
+objetos fundamentais - blobs trees commits
+
+	blobs 
+	echo 'conteudo' | git has-object -- stdin
+	echo 'conteudo' | openssl sha1
+	echo -e 'blob 9\0conteudo' | openssl sha1
+	os arquivos ficam armazenados dentro de blobs e dentro deles contem metadados, contem tipo tamanho \0 e o conteudo de fato
+
+	tree (árvores)
+	armazenam blobs contem metadados \0 aponta para um blob que contem um sha1 e tbm armazena o nome do arquivo. Responsavel por montar toda a estrutura do arquivo, podem tbm apontar para outras árvores e tem um sha1 dos metadados das arvores
+
+	tree
+	readme rakefile lib
+	blob blob tree
+	           simplegit.rb
+	           blob
+	commit
+	é o mais importante
+	aponta pra uma arvore, parente, para o ultimo commit, autor, mensagem. timestamp (a hora exata)
+
+	o sha1 desse commit é o hash de toda a essa informaçao
+    
+	qualquer alteracao no sha1 entao muda toda a encriptacao
+
+por isso o git é tão confiavel. forma segura
+
+sistema distribuido é possivel compartilhar o desenvolvimento
+git seguro
+
+------------PRIMEIROS COMANDOS GIT---------------------------------
+iniciar um repositorio git
+git init nome
+git add
+git commit 
+
+criando um repositório 
+	ls -a mostra arquivos ocultos
+	git config --global user
+iniciar um versionamento de código
+criar um commit
+
+git add nomeArquivo
+git add*
+git add. 
+git commit -m "commit inicial"
+
+
+---CICLO DE VIDA DOS ARQUIVOS GIT----
+git init inicializa o conceito do repositorio. De fato se cria um repositório
+
+tracked (arquivos rastreados)
+	unmodified - não modificado
+	modified - modificado
+	stage - arquivos que estão se preparando para o commit
+git add moveu o arquivo de untracked para staged
+após a modificacao é movido de unmodified para modified
+de modified volta para staged
+commit retorna todos para unmodified
+
+untracked ( o git ainda nao tem ciencia dele)
+
+repositorio
+	servidor
+	remote repository
+	ambiente de desenvolvimento
+		workind directory
+		stagin area
+		local repository - commit
+			local repository pode ser empurrado para remoto
+git status
+
+introducao ao github
+git config --list
+git config --global --unset user.nickname
+pinned/contribucoes/readme proprio perfil
+git add *
+git commit - m""
+
+seus repositorios>novo
+
+desmarcar README
+criar repositorio
+apontar repositorio > git push origin master e colocar a  url 
+https://github.com/silasmaverick/Dio_livro_de_receita.git
+git remote -v lista de remotes
+git push origin master name and password
+numero em cima é o inicio do sha1 detalhes
+
+-------Resolvendo Conflitos-----------------
+antes de empurrar o código vc tem que pushar a versao que ja esta no servidor, fazer as alteracoes, ou seja, modificar a versão mais recente
+
+conflito de mergie - duas alteracoes na mesma linha. O github vai permitir que vc resolva a situacao manualmente. 
+
+git pull origin master > puxa o diretorio de volta
+<<<<<< head daqui pra baixo esta diferente
+
+pave
+========= sua maquina
+
+resolve o conflito e commit novamente
+
+git clone passar/a/url
+ls -a mostar ocultos
+.git (significa que é um repositório e não uma pasta comum)
+
+certificado
+https://hermes.digitalinnovation.one/certificates/F9189A8D.pdf 
